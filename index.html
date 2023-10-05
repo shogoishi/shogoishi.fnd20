@@ -70,7 +70,14 @@
       </div>
 
       <div class="gameArea" id="playScreen">
-        <p>残り時間:</p>
+        <p>
+          <label for="remainingTime">残り時間</span>
+          <input id="remainingTime" type="text" readonly>秒
+        </p>
+        <p>
+          <label for="score">ポイント</span>
+          <input id="score" type="text" readonly>
+        </p>
         <p>
           <label for="expectedLabel">お題</span>
           <input id="expectedLabel" type="text" readonly>
@@ -78,8 +85,7 @@
         <p>
           <label for="inputLabel">入力欄</span>
           <!-- <input id="inputLabel" type="text" autocomplete="off"> type=textだと予測変換が表示されるためseachに変更-->
-          <input id="inputLabel" type="search" autocomplete="off">
-          <input id="judge" type="submit">
+          <input id="inputLabel" type="search" inputmode="kana-name">
         </p>
         <!-- <p>
           <span id="inputLahbel">入力欄</span>
