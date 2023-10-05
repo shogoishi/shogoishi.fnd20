@@ -54,15 +54,18 @@ li {
     margin-left: 20px;
 }
 
+#remainingTime {
+    text-align: right;
+}
 
-.start {
+#startScreen{
     display:block;
 }
 
-.play {
-    display: none;
+#playScreen {
+    display: block;
 }
 
-.result {
-    display: none;
+#resultScreen {
+    display: block;
 }
