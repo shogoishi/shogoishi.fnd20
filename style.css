@@ -1,0 +1,68 @@
+/* //報告スライドにリンクさせるCSS */
+h1 {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 0%;
+}
+#myName {
+    font-size: 20px;
+    margin-left: 20px;
+}
+h2 {
+    margin-bottom: 0;
+}
+h2::before {
+    content: "■";
+}
+
+ul {
+    font-size: 20px;
+    margin: 0;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+ol {
+    font-size: 18px;
+}
+
+button {
+    margin-left: 0px;
+}
+
+.gameArea {
+    width: 700px;
+    height: 400px;
+    background-color:orange ;
+}
+
+#inputLabel {
+    background-color: aqua;
+}
+
+#expectedLabel {
+    width: 200px;
+    height: 20px;
+    background-color: pink;
+}
+
+h3 {
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-left: 260px;
+    margin-bottom: 0px;
+}
+li {
+    margin-left: 20px;
+}
+
+
+.start {
+    display:block;
+}
+
+.play {
+    display: none;
+}
+
+.result {
+    display: none;
+}
