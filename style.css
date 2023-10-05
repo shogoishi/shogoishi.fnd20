@@ -1,5 +1,6 @@
 /* //報告スライドにリンクさせるCSS */
 h1 {
+    font-size: 30px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-bottom: 0%;
 }
@@ -12,6 +13,10 @@ h2 {
 }
 h2::before {
     content: "■";
+}
+
+#top {
+    text-align: center;
 }
 
 ul {
@@ -30,7 +35,7 @@ button {
 
 .gameArea {
     width: 700px;
-    height: 400px;
+    height: 250px;
     background-color:orange ;
 }
 
@@ -44,7 +49,7 @@ button {
     background-color: pink;
 }
 
-h3 {
+#gameTitle {
     padding-top: 0px;
     margin-top: 0px;
     margin-left: 260px;
@@ -63,9 +68,17 @@ li {
 }
 
 #playScreen {
-    display: block;
+    display: none;
 }
 
 #resultScreen {
-    display: block;
+    display: none;
+}
+
+#result {
+    text-align: center;
+}
+
+#summary {
+    font-size: 20px;
 }
