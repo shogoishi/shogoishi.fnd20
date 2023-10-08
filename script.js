@@ -1,18 +1,77 @@
 'use strict'
 // 1行目に記載している 'use strict' は削除しないでください
 
-function changeScreenStartToPlay() {
+
+function advanceOneStep() {
+    if (tmpProgress === 0) {
+        before.style.transition = "opacity 2s ease";//表示するときはフェードを使いたい。戻るボタンを使った場合にはフェードを入れたくないため設定を0sに変えている。そのため表示する前に毎回フェードの設定を2sに変える。
+        before.style.opacity = 1;
+        tmpProgress ++;
+    } else if (tmpProgress === 1) {
+        goal.style.transition = "opacity 2s ease";
+        goal.style.opacity = 1;
+        tmpProgress ++;
+    } else if(tmpProgress === 2) {
+        after.style.transition = "opacity 2s ease";
+        after.style.opacity = 1;
+        tmpProgress ++;
+    } else if (summarize.style.opacity !== "1") {
+        summarize.style.transition = "opacity 2s ease";
+        summarize.style.opacity = 1;
+        tmpProgress ++;
+    }
+}
+function stepBack() {
+    if (tmpProgress === 4) {
+        summarize.style.transition = "opacity 0s";
+        summarize.style.opacity = 0;
+        tmpProgress --;
+    } else if (tmpProgress === 3) {
+        after.style.transition = "opacity 0s";
+        after.style.opacity = 0;
+        tmpProgress --;
+    } else if (tmpProgress === 2) {
+        goal.style.transition = "opacity 0s";
+        goal.style.opacity = 0;
+        tmpProgress --;
+    } else if (tmpProgress === 1) {
+        before.style.transition = "opacity 0s";
+        tmpProgress --;
+    }
+}
+
+function changeScreenStartToCheck() {
     inputLabel.value = "";
+    // inputLabel.focus();//※focusはここに入れると動作しない。
     tmpAnswerNum = 0;
     nowScore = 0;
-    gameTimer();
+    // gameTimer();
     updateScore();
     shuffleArray();
     updateCurrentAnswer();
 
     startScreen.style.display = "none";
+    checkScreen.style.display = "block";
     playScreen.style.display = "block";
     resultScreen.style.display = "none";
+    imeCheckLabel.focus();
+}
+
+function changeScreenCheckToPlay() {
+    // inputLabel.value = "";
+    // inputLabel.focus();//※focusはここに入れると動作しない。
+    // tmpAnswerNum = 0;
+    // nowScore = 0;
+    gameTimer();
+    // updateScore();
+    // shuffleArray();
+    // updateCurrentAnswer();
+
+    startScreen.style.display = "none";
+    checkScreen.style.display = "none";
+    playScreen.style.display = "block";
+    resultScreen.style.display = "none";
+    inputLabel.focus();//入力欄に自動でカーソルを合わせすぐに入力できる状態にする。タイミングが重要で、プレイ画面表示後に実行しないとカーソルが合わないため注意。
 }
 function changeScreenPlayToResult() {
     lastScore.value = nowScore;
@@ -88,19 +147,29 @@ function judgement() {
     }
 }
 
-function isEnter(e) {
+function imeCheckLabelIsEnter(e) {
+    if (e.code === "Enter") {
+        changeScreenCheckToPlay();
+    }
+} 
+function inputLabelIsEnter(e) {
+    console.log(e);
     if (e.code === "Enter") {
         judgement();
     }
 } 
 
 function displayPassed() {
+    rightAudio.currentTime = 0;//音声ファイルの再生秒数を0秒に戻す(連続押しした際でも鳴るようにするために必要)
+    rightAudio.play();//オーディオを再生する
     displayJudge.innerHTML = "〇";
     displayJudge.style.background = "chartreuse";
     setTimeout(judgeDisplayClear,700);
 }
 
 function displayFailed() {
+    wrongAudio.currentTime = 0;
+    wrongAudio.play();
     displayJudge.innerHTML = "×";
     displayJudge.style.background = "red";
     setTimeout(judgeDisplayClear,700);
@@ -111,9 +180,15 @@ function judgeDisplayClear() {
     displayJudge.style.background = "white";
 }
 
-
+const nextButton = document.querySelector("#nextButton");
+const secretBackButton = document.querySelector("#secretBackButton");
+const before = document.querySelector("#before");
+const goal = document.querySelector("#goal");
+const after = document.querySelector("#after");
+const summarize = document.querySelector("#summarize");
 
 const startScreen = document.querySelector("#startScreen");
+const checkScreen = document.querySelector("#checkScreen");
 const playScreen = document.querySelector("#playScreen");
 const resultScreen =document.querySelector("#resultScreen");
 
@@ -123,11 +198,14 @@ const remainingTime = document.querySelector("#remainingTime");
 const retryButton = document.querySelector("#retry");
 const backButton = document.querySelector("#backToTop");
 
+const imeCheckLabel = document.querySelector("#imeCheckLabel");
 const inputLabel = document.querySelector("#inputLabel");
 
 const scoreDisplayLabel = document.querySelector("#score");
 const currentAnswerLabel = document.querySelector("#currentAnsLabel");
 const displayJudge = document.querySelector("#judge");
+const rightAudio = document.querySelector("#rightAudio");
+const wrongAudio = document.querySelector("#wrongAudio");
 
 const lastScore = document.querySelector("#lastScore"); 
 
@@ -191,8 +269,9 @@ let answerList = prefectureList;
 let shuffledAnswerList;
 
 let tmpAnswerNum = 0; 
+let tmpProgress = 0;
 
-startButton.addEventListener("click", changeScreenStartToPlay);
+startButton.addEventListener("click", changeScreenStartToCheck);
 // startButton.addEventListener("click", gameTimer);
 // startButton.addEventListener("click", updateScore);
 // startButton.addEventListener("click", shuffleArray);
@@ -200,9 +279,12 @@ startButton.addEventListener("click", changeScreenStartToPlay);
 
 cancelButton.addEventListener("click",changeScreenToStart)
 
-retryButton.addEventListener("click",changeScreenStartToPlay)
+retryButton.addEventListener("click",changeScreenStartToCheck)
 
 backButton.addEventListener("click",changeScreenToStart)
 
-inputLabel.addEventListener("keypress",isEnter);
+imeCheckLabel.addEventListener("keypress",imeCheckLabelIsEnter);
+inputLabel.addEventListener("keypress",inputLabelIsEnter);
 
+nextButton.addEventListener("click",advanceOneStep);
+secretBackButton.addEventListener("click",stepBack);
