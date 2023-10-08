@@ -1,16 +1,125 @@
 /* //報告スライドにリンクさせるCSS */
+.container {
+    overflow: auto;
+    scroll-snap-type: y mandatory;
+    width: 100%;
+    height: 100vh;
+}
+
+section {
+    position: relative;
+    /* position: static; *//*ボタンタグが2セクション目に残るためNG*/
+    scroll-snap-align: start;
+    width: 100%;
+    height: 100%;
+}
+
+section:nth-child(1) {
+    background-image: url(pokemon3.png);
+    background-color: rgba(255, 255, 255, 0.8);
+    background-size: cover;
+    background-blend-mode: lighten;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+section:nth-child(2) {
+    background-image: url(pokemon4.jpg);
+    background-color: rgba(255, 255, 255, 0.8);
+    background-size: cover;
+    background-blend-mode: lighten;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 h1 {
-    font-size: 30px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 3vw;
+    font-family:"Yu Gothic","sans-serif";
     margin-bottom: 0%;
+    text-align: center;
 }
 #myName {
-    font-size: 20px;
-    margin-left: 20px;
+    font-size: 1.5vw;
+    margin-top: 0px;
+    text-align: center;
+    font-family:"Yu Gothic","sans-serif";
 }
+
+#nextButton {
+    position: absolute;
+    width: 9vw;
+    padding: 0.7%;
+    top: 17%;
+    right: 10%;
+}
+#secretBackButton {
+    position: absolute;
+    width: 9vw;
+    padding: 0.7%;
+    /* padding: 10px 11px; */
+    top: 17%;
+    right:0%;
+    opacity: 1;/*透明にしただけでボタン自体は存在*/
+}
+
 h2 {
-    margin-bottom: 0;
+    /* margin-bottom: 0px; */
+    margin-left: 20px;
+    /* font-size: 30px; */
+    font-size: 1.7vw;
+    /* color:cornflowerblue; */
+    background-color: rgba(200, 200, 200, 0.8);
+    width: 70vw;
+    padding: 10px 20px;
 }
+
+#before {
+    position: static;
+    /* position: absolute;
+    top: 150px;
+    left:50px; */
+    /* width: 500px; */
+    padding: 10px 20px;
+    transition: opacity 2s ease;
+    opacity: 0;
+}
+#goal {
+    position: static;
+    /* position: absolute;
+    top: 400px;
+    left:50px; */
+    /* width: 500px; */
+    padding: 10px 20px;
+    transition: opacity 2s ease;
+    opacity: 0;
+}
+#after {
+    position: static;
+    /* position: absolute;
+    top: 700px;
+    left:50px; */
+    /* width: 500px; */
+    padding: 10px 20px;
+    transition: opacity 2s ease;
+    opacity: 0;
+}
+#summarize {
+    position: static;
+    /* position: absolute;
+    bottom: 5%;
+    right:5%; */
+    /* width: 500px; */
+    padding: 10px 20px;
+    transition: opacity 2s ease;
+    opacity: 0;
+}
+.mainText {
+    font-size: 1.5vw;
+    font-weight: 100;
+    margin: 0;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
 h2::before {
     content: "■";
 }
@@ -19,7 +128,7 @@ h2::before {
     text-align: center;
 }
 
-ul {
+/* ul {
     font-size: 20px;
     margin: 0;
     padding-top: 0px;
@@ -27,16 +136,35 @@ ul {
 }
 ol {
     font-size: 18px;
-}
+} */
 
 button {
     margin-left: 0px;
 }
 
 .gameArea {
-    width: 700px;
-    height: 250px;
+    width: 80%;
+    height: 500px;
     background-color:orange ;
+    text-align: center;
+    margin: auto;
+}
+
+#checkScreen {
+    width: 60%;
+    height: 55%;
+    background-color: rgba(75, 235, 27, 0.9);/*background-colorでrgbaを選択することで、背景の透明度まで指定できる。opacityを使った場合文字含め全体が透過するため、背景のみ透過したい場合はこれを使うのが良い**/
+    text-align: center;
+    margin: auto;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#imeCheckLabel {
+    width: 30%;
 }
 
 #inputLabel {
@@ -50,10 +178,8 @@ button {
 }
 
 #gameTitle {
-    padding-top: 0px;
-    margin-top: 0px;
-    margin-left: 260px;
-    margin-bottom: 0px;
+    font-size: 50px;
+    text-align: center;
 }
 li {
     margin-left: 20px;
@@ -77,8 +203,4 @@ li {
 
 #result {
     text-align: center;
-}
-
-#summary {
-    font-size: 20px;
 }
