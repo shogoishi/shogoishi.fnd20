@@ -12,9 +12,17 @@ section {
     scroll-snap-align: start;
     width: 100%;
     height: 100%;
+
+    background-image: url(pokemon3.png);
+    background-color: rgba(255, 255, 255, 0.8);
+    background-size: cover;
+    background-blend-mode: lighten;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-section:nth-child(1) {
+/*各セクションの背景画像は同じで良いため↑で設定*/
+/* section:nth-child(1) {
     background-image: url(pokemon3.png);
     background-color: rgba(255, 255, 255, 0.8);
     background-size: cover;
@@ -29,7 +37,7 @@ section:nth-child(2) {
     background-blend-mode: lighten;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
+} */
 
 h1 {
     font-size: 3vw;
@@ -37,6 +45,7 @@ h1 {
     margin-bottom: 0%;
     text-align: center;
 }
+
 #myName {
     font-size: 1.5vw;
     margin-top: 0px;
@@ -58,7 +67,7 @@ h1 {
     /* padding: 10px 11px; */
     top: 17%;
     right:0%;
-    opacity: 1;/*透明にしただけでボタン自体は存在*/
+    opacity: 0;/*透明にしただけでボタン自体は存在*/
 }
 
 h2 {
@@ -80,6 +89,8 @@ h2 {
     /* width: 500px; */
     padding: 10px 20px;
     transition: opacity 2s ease;
+    /* background-color: rgba(248, 252, 33, 0.8); */
+    /* background-color: rgba(248, 252, 33, 0.8); */
     opacity: 0;
 }
 #goal {
@@ -112,12 +123,21 @@ h2 {
     transition: opacity 2s ease;
     opacity: 0;
 }
+
+#summarize .mainText {
+    margin-left: 30px;
+}
+
 .mainText {
     font-size: 1.5vw;
     font-weight: 100;
     margin: 0;
     padding-top: 0px;
     margin-top: 0px;
+}
+
+#before .mainText {
+    margin-left: 30px;
 }
 
 h2::before {
@@ -127,14 +147,18 @@ h2::before {
 .top {
     text-align: center;
     font-size: 35px;
+    margin-top:0px;
+    padding-top: 6px;
+    margin-bottom: 0px;
+    border-bottom: 2px solid;
 }
 
-.choiceTime {
+.choiceTime, .choiceGenre {
     margin-top: 0px;
     margin-bottom: 0px;
 }
 
-input[type=radio] {
+input[type="radio"] {
     font-size: 10px;
     display: none;
 }
@@ -142,7 +166,8 @@ input[type=radio] {
 input[type="radio"]:checked + label {
         background: #e47bc4;/* マウス選択時の背景色を指定する */
         color: #ffffff; /* マウス選択時のフォント色を指定する */
-}
+    }
+
 
 .timeLabel {
     display: inline-block;
@@ -154,27 +179,51 @@ input[type="radio"]:checked + label {
     width: 50px;
     height: 30px;
     background-color: chartreuse;
-    line-height:30px; /*行の高さを指定する */
-    cursor: pointer; /* マウスカーソルの形（リンクカーソル）を指定する */
-    border: 2px solid;/* ボックスの境界線を実線で指定する */
-    border-radius: 5px; /* 角丸を指定する */
+    line-height:30px;
+    cursor: pointer;
+    border: 2px solid;
+    border-radius: 5px;
     font-size: 16px;
 } 
+.genreLabel {
+    display: inline-block;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 10px;
+    border: 1px solid;
+    width: 60px;
+    height: 30px;
+    background-color: chartreuse;
+    line-height:30px; /*行の高さを指定する */
+    cursor: pointer;
+    border: 2px solid;
+    border-radius: 5px; /* 角を丸くする */
+    font-size: 13px;
+} 
 
-#choiceTimeArea {
+#choiceTimeArea, #choiceGenreArea {
     background-color: cyan;
     width: 300px;
     height: 85px;
     margin: auto;
     display: block;
     font-size: 20px;
-    border: 2px solid;/* ボックスの境界線を実線で指定する */
+    border: 2px solid;
+}
+
+#choiceGenreArea {
+    margin-top: 2px;
+}
+
+#choiceTimeArea span, #choiceGenreArea span {
+    text-decoration: underline;/*テキストのアンダーライン*/
 }
 
 #start {
     text-align: center;
     font-size: 30px;
-    margin-top:30px;
+    margin-top:20px;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 10px;
@@ -217,10 +266,6 @@ label[for="currentAnsLabel"] {
     height: 30px;
 }
 
-#currentAnsLabel span {
-    font-size: 15px;
-}
-
 label[for="inputLabel"] {
     text-align: left;
     font-size: 25px;
@@ -242,7 +287,6 @@ label[for="inputLabel"] {
     padding-right: 3px;
     padding-top: 1.5px;
     padding-bottom: 1.5px;
-    /* padding: 3px; */
 }
 
 #currentAnsArea, #inputAnsArea {
@@ -254,10 +298,15 @@ label[for="inputLabel"] {
     font-size: 35px;
 }
 #lastScore {
+    font-size: 35px;
     width: 120px;
     height: 35px;
     vertical-align:middle;
     text-align: right;
+}
+
+#lastScoreArea span {
+    font-size: 25px;
 }
 
 #retry, #backToTop {
@@ -269,7 +318,7 @@ label[for="inputLabel"] {
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 10px;
-    cursor: pointer;
+    cursor: pointer;/*カーソルを合わせると手のマークになる*/
 }
 
 #backToTop {
@@ -297,6 +346,7 @@ button {
     background-color:orange ;
     text-align: center;
     margin: auto; /*画面中央に配置*/
+    border: 2px solid;
 }
 
 .explanation {
@@ -319,7 +369,7 @@ button {
 
     width:100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.75);
     text-align: center;
     margin: auto;
     display: none;
@@ -335,12 +385,11 @@ button {
     background-color: rgba(75, 235, 27, 0.9);/*background-colorでrgbaを選択することで、背景の透明度まで指定できる。opacityを使った場合文字含め全体が透過するため、背景のみ透過したい場合はこれを使うのが良い**/
     text-align: center;
     margin: auto;
-    /* display: block; */
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%,-50%);
-    border: 3px solid;/* ボックスの境界線を実線で指定する */
+    border: 3px solid;/* ボックスの枠線。solidは線種で実線。 */
 }
 
 #imeCheckLabel {
