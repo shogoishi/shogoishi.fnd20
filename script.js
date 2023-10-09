@@ -6,16 +6,23 @@ function advanceOneStep() {
     if (tmpProgress === 0) {
         before.style.transition = "opacity 2s ease";//表示するときはフェードを使いたい。戻るボタンを使った場合にはフェードを入れたくないため設定を0sに変えている。そのため表示する前に毎回フェードの設定を2sに変える。
         before.style.opacity = 1;
+        before.style.background = "rgba(248, 252, 33, 0.8)";
         tmpProgress ++;
     } else if (tmpProgress === 1) {
+        goal.style.background = "rgba(248, 252, 33, 0.8)";
+        before.style.background = "rgba(200, 200, 200, 0.8)";
         goal.style.transition = "opacity 2s ease";
         goal.style.opacity = 1;
         tmpProgress ++;
     } else if(tmpProgress === 2) {
+        after.style.background = "rgba(248, 252, 33, 0.8)";
+        goal.style.background = "rgba(200, 200, 200, 0.8)";
         after.style.transition = "opacity 2s ease";
         after.style.opacity = 1;
         tmpProgress ++;
     } else if (summarize.style.opacity !== "1") {
+        summarize.style.background = "rgba(248, 252, 33, 0.8)";
+        after.style.background = "rgba(200, 200, 200, 0.8)";
         summarize.style.transition = "opacity 2s ease";
         summarize.style.opacity = 1;
         tmpProgress ++;
@@ -24,18 +31,25 @@ function advanceOneStep() {
 function stepBack() {
     if (tmpProgress === 4) {
         summarize.style.transition = "opacity 0s";
+        after.style.background = "rgba(248, 252, 33, 0.8)";
+        summarize.style.background = "rgba(200, 200, 200, 0.8)";
         summarize.style.opacity = 0;
         tmpProgress --;
     } else if (tmpProgress === 3) {
         after.style.transition = "opacity 0s";
+        goal.style.background = "rgba(248, 252, 33, 0.8)";
+        after.style.background = "rgba(200, 200, 200, 0.8)";
         after.style.opacity = 0;
         tmpProgress --;
     } else if (tmpProgress === 2) {
         goal.style.transition = "opacity 0s";
+        before.style.background = "rgba(248, 252, 33, 0.8)";
+        goal.style.background = "rgba(200, 200, 200, 0.8)";
         goal.style.opacity = 0;
         tmpProgress --;
     } else if (tmpProgress === 1) {
         before.style.transition = "opacity 0s";
+        before.style.background = "rgba(200, 200, 200, 0.8)";
         before.style.opacity = 0;
         tmpProgress --;
     }
@@ -43,14 +57,17 @@ function stepBack() {
 
 function changeScreenStartToCheck() {
     setLimitTime();
+    nowScore = 0;
+    remainingTime.value = gameTimeSec;
+    currentAnswerLabel.value = "";//再プレイ時に前回値が表示されないようにするため
+    scoreDisplayLabel.value = nowScore;
     inputLabel.value = "";
     // inputLabel.focus();//※focusはここに入れると動作しない。
     tmpAnswerNum = 0;
-    nowScore = 0;
     // gameTimer();
-    updateScore();
-    shuffleArray();
-    updateCurrentAnswer();
+    // updateScore();
+    // shuffleArray();
+    // updateCurrentAnswer();
 
     startScreen.style.display = "none";
     // checkScreen.style.display = "block";
@@ -66,9 +83,9 @@ function changeScreenCheckToPlay() {
     // tmpAnswerNum = 0;
     // nowScore = 0;
     gameTimer();
-    // updateScore();
-    // shuffleArray();
-    // updateCurrentAnswer();
+    updateScore();
+    shuffleArray();
+    updateCurrentAnswer();
 
     startScreen.style.display = "none";
     // checkScreen.style.display = "none";
