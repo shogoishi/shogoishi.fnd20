@@ -124,9 +124,158 @@ h2::before {
     content: "■";
 }
 
-#top {
+.top {
     text-align: center;
+    font-size: 35px;
 }
+
+.choiceTime {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+input[type=radio] {
+    font-size: 10px;
+    display: none;
+}
+
+input[type="radio"]:checked + label {
+        background: #e47bc4;/* マウス選択時の背景色を指定する */
+        color: #ffffff; /* マウス選択時のフォント色を指定する */
+}
+
+.timeLabel {
+    display: inline-block;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 10px;
+    border: 1px solid;
+    width: 50px;
+    height: 30px;
+    background-color: chartreuse;
+    line-height:30px; /*行の高さを指定する */
+    cursor: pointer; /* マウスカーソルの形（リンクカーソル）を指定する */
+    border: 2px solid;/* ボックスの境界線を実線で指定する */
+    border-radius: 5px; /* 角丸を指定する */
+    font-size: 16px;
+} 
+
+#choiceTimeArea {
+    background-color: cyan;
+    width: 300px;
+    height: 85px;
+    margin: auto;
+    display: block;
+    font-size: 20px;
+    border: 2px solid;/* ボックスの境界線を実線で指定する */
+}
+
+#start {
+    text-align: center;
+    font-size: 30px;
+    margin-top:30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#playScreenLabel {
+    font-size: 20px;
+}
+label[for="score"] {
+    margin-left: 30px ;
+}
+
+#playScreenLabel span {
+    font-size: 15px;
+}
+
+#remainingTime {
+    text-align: right;
+    font-size: 20px;
+    width: 50px;
+}
+#score {
+    text-align: right;
+    font-size: 20px;
+    width: 50px;
+}
+
+label[for="currentAnsLabel"] {
+    text-align: left;
+    font-size: 25px;
+    margin-left: 10px ;
+}
+
+#currentAnsLabel {
+    font-size: 25px;
+    width: 380px;
+    height: 30px;
+}
+
+#currentAnsLabel span {
+    font-size: 15px;
+}
+
+label[for="inputLabel"] {
+    text-align: left;
+    font-size: 25px;
+    margin-left: 10px ;
+}
+
+#inputLabel {
+    background-color: aqua;
+    font-size: 25px;
+    width: 330px;
+    height: 33px;
+}
+
+#judge {
+    font-size: 18px;
+    background-color: white;
+    border: 2px solid;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 1.5px;
+    padding-bottom: 1.5px;
+    /* padding: 3px; */
+}
+
+#currentAnsArea, #inputAnsArea {
+    text-align: left;
+    margin-left: 10px;
+}
+
+#lastScoreArea {
+    font-size: 35px;
+}
+#lastScore {
+    width: 120px;
+    height: 35px;
+    vertical-align:middle;
+    text-align: right;
+}
+
+#retry, #backToTop {
+    text-align: center;
+    font-size: 20px;
+    margin-top:30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#backToTop {
+    margin-left: 28px;
+}
+
 
 /* ul {
     font-size: 20px;
@@ -143,17 +292,34 @@ button {
 }
 
 .gameArea {
-    width: 80%;
-    height: 500px;
+    width: 520px;
+    height: 450px;
     background-color:orange ;
     text-align: center;
-    margin: auto;
+    margin: auto; /*画面中央に配置*/
 }
 
-#checkScreen {
-    width: 60%;
-    height: 55%;
-    background-color: rgba(75, 235, 27, 0.9);/*background-colorでrgbaを選択することで、背景の透明度まで指定できる。opacityを使った場合文字含め全体が透過するため、背景のみ透過したい場合はこれを使うのが良い**/
+.explanation {
+    font-size: 20px;
+}
+
+#readyHeader {
+    margin-top: 7px;
+    margin-bottom: 7px;
+    font-size: 25px;
+}
+#readyText {
+    margin-top: 0px;
+    margin-left: 30px;
+    text-align: left;
+}
+
+
+#checkScreenFull {
+
+    width:100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
     text-align: center;
     margin: auto;
     display: none;
@@ -163,19 +329,25 @@ button {
     transform: translate(-50%,-50%);
 }
 
+#checkScreen {
+    width: 350px;
+    height: 170px;
+    background-color: rgba(75, 235, 27, 0.9);/*background-colorでrgbaを選択することで、背景の透明度まで指定できる。opacityを使った場合文字含め全体が透過するため、背景のみ透過したい場合はこれを使うのが良い**/
+    text-align: center;
+    margin: auto;
+    /* display: block; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 3px solid;/* ボックスの境界線を実線で指定する */
+}
+
 #imeCheckLabel {
-    width: 30%;
+    font-size: 15px;
+    width: 250px;
 }
 
-#inputLabel {
-    background-color: aqua;
-}
-
-#expectedLabel {
-    width: 200px;
-    height: 20px;
-    background-color: pink;
-}
 
 #gameTitle {
     font-size: 50px;
@@ -185,9 +357,6 @@ li {
     margin-left: 20px;
 }
 
-#remainingTime {
-    text-align: right;
-}
 
 #startScreen{
     display:block;
@@ -199,8 +368,4 @@ li {
 
 #resultScreen {
     display: none;
-}
-
-#result {
-    text-align: center;
 }
