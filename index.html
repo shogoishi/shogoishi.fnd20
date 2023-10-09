@@ -23,32 +23,31 @@
       <button id="nextButton">次を表示</button>
       <button id="secretBackButton">1つ戻る</button>
 
-      <h2 id="before">受講前のプログラミングスキル、知識
-          <ul class="mainText">
-            <li>pythonでの簡単なプログラミング</li>
-            <li>変数、配列、関数、条件分岐、forループ 等の基本知識</li>
-          </ul>
+      <h2 id="before">受講前のレベル
+        <p class="mainText">
+          pythonの経験が少しあるが、まだまだ初心者レベルで基本知識から不足あり
+        </p>
       </h2>
 
       <h2 id="goal">目標
         <ul class="mainText">
-          <li>基本知識を体系的に学び理解を深める</li>
-          <li>Webページの作成ができる(JavaScript､HTML､CSS)</li>
+          <li>基本知識を体系的に学び、知識を広げる、理解を深める</li>
+          <li>JavaScript､HTML､CSSを学び、基本的なWebページ作成ができる</li>
         </ul>
       </h2>
 
-      <h2 id="after">学んだこと
+      <h2 id="after">受講後　学んだこと
         <ul class="mainText">
-          <li>基本知識の理解を深めることができた</li>
-          <li>JavaScript、HTML、CSSについて学び、Webページが作れるようになった</li>
+          <li>基本知識の理解を深める　→　PowerAutomateのフロー作成時に活用できた</li>
+          <li>基本的なWebページ作成　→　本ページおよび簡単なゲームの作成ができた</li>
       </h2>
     
       <h2 id="summarize">まとめ
-        <div class="mainText" id="summarize-font">
-          早速PowerAutomateでの改善で学びを活用でき、成長を実感できました。<br>
-          引き続き学習してレベルアップを図りたいと思います。<br>
-          また、自身の業務のテストスクリプト作成などでも活かしていきたいと思います。<br>
-          他の受講生の皆さんの積極的な姿勢を見て、マインド的な部分でも学びを得ることができました。
+        <div class="mainText">
+          わからないことを自ら調べて解決するところも多く経験できて、
+とてもいい学びになりました。<br>
+          また、他の受講生の取り組み姿勢からも良い刺激を受けることができました。<br>
+          今後もレベルアップを図りたいと思います。
         </div>
       </h2>
 
@@ -56,7 +55,6 @@
     
     <section class="game">
       <div class="start">
-        <!-- <h2>成果物</h2>  -->
         <h3 id="gameTitle">タ イ ピ ン グ ゲ ー ム</h3>
         <div class="gameArea" id="startScreen">
           <h3 class="top">遊　び　方</h3>
@@ -64,11 +62,17 @@
             お題の文字（ひらがな）を<br>
             入力欄に打ち込みエンター！
           </p>
-          <p id="choiceTimeArea">
-            制限時間選択<br>
+          <p id="choiceTimeArea"><span>
+            制限時間選択</span><br>
             <input type="radio" name="choiceTimeButton" id="1min" class="choiceTime" value="30"><label for="1min" class="timeLabel">30秒</label>
             <input type="radio" name="choiceTimeButton" id="2min" class="choiceTime" value="120" checked><label for="2min" class="timeLabel">2分</label>
             <input type="radio" name="choiceTimeButton" id="3min" class="choiceTime" value="180"><label for="3min" class="timeLabel">3分</label>
+          </p>
+          <p id="choiceGenreArea"><span>
+            ジャンル選択</span><br>
+            <input type="radio" name="choiceGenreButton" id="genre1" class="choiceGenre" value="genre1" checked><label for="genre1" class="genreLabel">都道府県</label>
+            <input type="radio" name="choiceGenreButton" id="genre2" class="choiceGenre" value="genre2"><label for="genre2" class="genreLabel">準備中</label>
+            <input type="radio" name="choiceGenreButton" id="genre3" class="choiceGenre" value="genre3"><label for="genre3" class="genreLabel">準備中</label>
           </p>
           <button id="start" class="toPlayScreen">スタート！</button>
         </div>
@@ -76,7 +80,7 @@
 
       <div id="checkScreenFull">
         <div id="checkScreen">
-          <h3 id="readyHeader">※準備はいいですか？※</h3>
+          <h3 id="readyHeader">※ 準備はいいですか？ ※</h3>
           <h4 id="readyText">
             ①入力モードを「かな入力」に変更<br>
             ②Enterキーを押して開始
@@ -93,12 +97,11 @@
           <label for="remainingTime">残り時間</label>
           <input id="remainingTime" type="text" readonly><span>秒</span>
           <label for="score">スコア</label>
-          <input id="score" type="text" readonly><span>（ 文字数 × 10 ）</span>
+          <input id="score" type="text" readonly><span>pt（ 文字数 × 10 ）</span>
         </p>
         <p id="currentAnsArea">
           <label for="currentAnsLabel">お題</label>
           <input id="currentAnsLabel" type="text" readonly>
-          <!-- <span>※ひらがな部分のみ</span> -->
         </p>
         <p id="inputAnsArea">
           <label for="inputLabel">入力</span>
@@ -115,7 +118,7 @@
         <h3 class="top">結　果　発　表</h3>
         <p id="lastScoreArea">
           <label for="lastScore">スコア</label>
-          <input id="lastScore" type="text" readonly>
+          <input id="lastScore" type="text" readonly><span>pt</span>
         </p>
         <button id="retry" class="toPlayScreen">もう一度プレイ</button>
         <button id="backToTop" class="toStartScreen">トップ画面に戻る</button>
