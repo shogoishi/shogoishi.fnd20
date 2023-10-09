@@ -36,11 +36,13 @@ function stepBack() {
         tmpProgress --;
     } else if (tmpProgress === 1) {
         before.style.transition = "opacity 0s";
+        before.style.opacity = 0;
         tmpProgress --;
     }
 }
 
 function changeScreenStartToCheck() {
+    setLimitTime();
     inputLabel.value = "";
     // inputLabel.focus();//※focusはここに入れると動作しない。
     tmpAnswerNum = 0;
@@ -51,7 +53,8 @@ function changeScreenStartToCheck() {
     updateCurrentAnswer();
 
     startScreen.style.display = "none";
-    checkScreen.style.display = "block";
+    // checkScreen.style.display = "block";
+    checkScreenFull.style.display = "block";
     playScreen.style.display = "block";
     resultScreen.style.display = "none";
     imeCheckLabel.focus();
@@ -68,7 +71,8 @@ function changeScreenCheckToPlay() {
     // updateCurrentAnswer();
 
     startScreen.style.display = "none";
-    checkScreen.style.display = "none";
+    // checkScreen.style.display = "none";
+    checkScreenFull.style.display = "none";
     playScreen.style.display = "block";
     resultScreen.style.display = "none";
     inputLabel.focus();//入力欄に自動でカーソルを合わせすぐに入力できる状態にする。タイミングが重要で、プレイ画面表示後に実行しないとカーソルが合わないため注意。
@@ -86,6 +90,14 @@ function changeScreenToStart() {
     startScreen.style.display = "block";
     playScreen.style.display = "none";
     resultScreen.style.display = "none";
+}
+
+function setLimitTime() {
+    for(let i = 0; i < choiceTimeButton.length; i++) {
+        if (choiceTimeButton[i].checked === true) {
+            gameTimeSec = choiceTimeButton[i].value;
+        }
+    }
 }
 
 function gameTimer() {
@@ -147,14 +159,14 @@ function judgement() {
     }
 }
 
-function imeCheckLabelIsEnter(e) {
-    if (e.code === "Enter") {
+function imeCheckLabelIsEnter(keyEvent) {
+    if (keyEvent.key === "Enter") {
         changeScreenCheckToPlay();
     }
 } 
-function inputLabelIsEnter(e) {
-    console.log(e);
-    if (e.code === "Enter") {
+function inputLabelIsEnter(keyEvent) {
+    console.log(keyEvent);
+    if (keyEvent.key === "Enter") {
         judgement();
     }
 } 
@@ -162,7 +174,7 @@ function inputLabelIsEnter(e) {
 function displayPassed() {
     rightAudio.currentTime = 0;//音声ファイルの再生秒数を0秒に戻す(連続押しした際でも鳴るようにするために必要)
     rightAudio.play();//オーディオを再生する
-    displayJudge.innerHTML = "〇";
+    displayJudge.innerHTML = " 〇 ";
     displayJudge.style.background = "chartreuse";
     setTimeout(judgeDisplayClear,700);
 }
@@ -176,7 +188,7 @@ function displayFailed() {
 }
 
 function judgeDisplayClear() {
-    displayJudge.innerHTML = "";
+    displayJudge.innerHTML = "判定";
     displayJudge.style.background = "white";
 }
 
@@ -188,9 +200,12 @@ const after = document.querySelector("#after");
 const summarize = document.querySelector("#summarize");
 
 const startScreen = document.querySelector("#startScreen");
-const checkScreen = document.querySelector("#checkScreen");
+// const checkScreen = document.querySelector("#checkScreen");
+const checkScreenFull = document.querySelector("#checkScreenFull");
 const playScreen = document.querySelector("#playScreen");
 const resultScreen =document.querySelector("#resultScreen");
+
+const choiceTimeButton = document.querySelectorAll("input[name='choiceTimeButton']")
 
 const startButton = document.querySelector("#start");
 const cancelButton = document.querySelector("#cancel");
@@ -209,7 +224,7 @@ const wrongAudio = document.querySelector("#wrongAudio");
 
 const lastScore = document.querySelector("#lastScore"); 
 
-let gameTimeSec = 30;
+let gameTimeSec;
 let intervalId;
 let timerID;
 
